@@ -2,8 +2,10 @@
 import {Head, Link} from '@inertiajs/vue3'
 
 defineProps({
-    schools: Object
+    schools: Object,
+    search: String
 })
+
 </script>
 
 <template>
@@ -11,20 +13,28 @@ defineProps({
     <Head content="Tagesaktuelle Daten von Hamburger Schulen" meta="description"/>
 
     <div class="max-w-7xl mx-auto">
-        <header class="bg-slate-900 my-4 p-4 text-white flex space-x-4 items-center rounded-t-lg">
-            <h1 class="text-3xl font-bold">Hamburger Schulen</h1>
-            <input class="p-2 w-full rounded border border-gray-300"
-                   placeholder="Suche nach Schulnamen, Adressen, Schulformen, Abschlüssen..." type="text">
+        <header class="bg-slate-900 my-4 p-4 text-white rounded-t-lg">
+            <form action="/" class="px-4 flex space-x-8 items-center" method="get">
+                <h1 class="text-3xl font-bold">Hamburger&nbsp;Schulen</h1>
+                <input :value="search" class="p-2 w-full rounded border border-gray-300 text-slate-950" name="search"
+                       placeholder="Suche nach Schulnamen, Adressen, Schulformen, Abschlüssen..." type="search">
+                <button type="submit">Suchen</button>
+            </form>
         </header>
         <main class="p-4 text-xs">
-            <table class="w-full bg-white">
+            <div class="mt-4 flex justify-center">
+                <Link v-for="link in schools.links"
+                      :class="['px-3 py-1 border', { 'text-slate-500': !link.url, 'font-bold bg-slate-500 text-white': link.active }]"
+                      :href="link.url??'#'"
+                      v-html="link.label"/>
+            </div>
+            <table class="w-full mt-4 bg-white">
                 <thead>
                 <tr>
                     <th class="py-2 px-4 border-b">Schulnr.</th>
                     <th class="py-2 px-4 border-b">Name</th>
                     <th class="py-2 px-4 border-b">Adresse + Ort</th>
                     <th class="py-2 px-4 border-b">Telefon</th>
-                    <th class="py-2 px-4 border-b">Fax</th>
                     <th class="py-2 px-4 border-b">Bezirk</th>
                 </tr>
                 </thead>
@@ -33,21 +43,20 @@ defineProps({
                     <td class="py-2 px-4 border-b" v-text="school.schul_id"/>
                     <td class="py-2 px-4 border-b" v-text="school.schulname"/>
                     <td class="py-2 px-4 border-b">
-                        <span v-text="school.adresse_strasse_hausnr"/><br>
+                        <span v-text="school.adresse_strasse_hausnr"/>,
                         <span v-text="school.adresse_ort"/>
                     </td>
                     <td class="py-2 px-4 border-b" v-text="school.schul_telefonnr"/>
-                    <td class="py-2 px-4 border-b" v-text="school.fax"/>
                     <td class="py-2 px-4 border-b" v-text="school.bezirk"/>
                 </tr>
                 </tbody>
             </table>
-            <div class="mt-4 flex justify-center">
-                <Link v-for="link in schools.links"
-                      :class="['px-3 py-1 border', { 'text-slate-500': !link.url, 'font-bold bg-slate-500 text-white': link.active }]"
-                      :href="link.url??'#'"
-                      v-html="link.label"/>
+            <div>
+                <p class="mt-4 font-bold text-center text-slate-500">
+                    Zeige {{ schools.from }} bis {{ schools.to }} von {{ schools.total }} Schulen
+                </p>
             </div>
+
         </main>
         <footer class="bg-gray-800 p-4 text-white text-center">
             <div class="mb-4 flex items-center justify-around">

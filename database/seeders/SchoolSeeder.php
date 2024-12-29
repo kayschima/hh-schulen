@@ -24,7 +24,7 @@ class SchoolSeeder extends Seeder
     public function extracted(mixed $school): void
     {
         School::create([
-                            'id' => $school['id'],
+            'id' => $school['id'],
             'schul_id' => $school['properties']['schul_id'],
             'schulname' => $school['properties']['schulname'],
             'adresse_strasse_hausnr' => $school['properties']['adresse_strasse_hausnr'],

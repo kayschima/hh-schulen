@@ -1,11 +1,6 @@
 <?php
 
-use App\Models\School;
+use App\Http\Controllers\SchoolController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Home',
-        ['schools' => School::query()->orderBy('schulname')->paginate(10)]
-    );
-});
+Route::get('/', SchoolController::class);
