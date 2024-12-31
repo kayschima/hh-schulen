@@ -18,13 +18,12 @@ watchDebounced(suche, () => {
         url.searchParams.delete('search')
     }
 
-    console.log(url.toString())
     router.visit(url.toString(), {
             preserveScroll: true,
             preserveState: true
         }
     )
-}, {debounce: 1000, maxWait: 5000})
+}, {debounce: 350, maxWait: 5000})
 
 </script>
 
