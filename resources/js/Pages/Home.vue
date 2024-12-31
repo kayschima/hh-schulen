@@ -1,11 +1,30 @@
 <script setup>
-import {Head, Link} from '@inertiajs/vue3'
+import {Head, Link, router} from '@inertiajs/vue3'
+import {ref} from "vue";
+import {watchDebounced} from "@vueuse/core";
 import SchoolEntry from "@/Components/SchoolEntry.vue";
 
 defineProps({
-    schools: Object,
-    search: String
+    schools: Object
 })
+
+const suche = ref('')
+
+watchDebounced(suche, () => {
+    let url = new URL(window.location.href)
+    if (suche.value) {
+        url.searchParams.append('search', suche.value)
+    } else {
+        url.searchParams.delete('search')
+    }
+
+    console.log(url.toString())
+    router.visit(url.toString(), {
+            preserveScroll: true,
+            preserveState: true
+        }
+    )
+}, {debounce: 1000, maxWait: 5000})
 
 </script>
 
@@ -14,15 +33,13 @@ defineProps({
     <Head content="Tagesaktuelle Daten von Hamburger Schulen" meta="description"/>
 
     <div class="max-w-7xl mx-auto">
-        <header class="bg-slate-900 my-4 p-4 text-white rounded-t-lg">
-            <form action="/" class="px-4 flex space-x-8 items-center" method="get">
-                <h1 class="text-3xl font-bold">
-                    <a href="/">Hamburger&nbsp;Schulen </a>
-                </h1>
-                <input :value="search" class="p-2 w-full rounded border border-gray-300 text-slate-950" name="search"
-                       placeholder="Suche nach Schulnamen, Adressen, Schulformen, Abschlüssen..." type="search">
-                <button type="submit">Suchen</button>
-            </form>
+        <header class="bg-slate-900 my-4 p-4 text-white rounded-t-lg flex items-center space-x-4">
+            <h1 class="text-xl font-bold hover:font-extrabold">
+                <a href="/">Hamburger&nbsp;Schulen </a>
+            </h1>
+            <input v-model="suche" class="p-2 text-sm w-full rounded border border-gray-300 text-slate-950"
+                   name="search"
+                   placeholder="Suche nach Schulnamen, Adressen, Schulformen, Abschlüssen..." type="search">
         </header>
         <main class="px-4 text-xs">
             <div class="mt-2 flex justify-center">
@@ -55,13 +72,14 @@ defineProps({
         </main>
         <footer class="bg-slate-950 p-4 text-slate-100 text-center rounded-b-lg">
             <div class="mb-4 flex items-center justify-around text-sm">
-                <a href="#">Impressum</a>
-                <a href="#">Datenschutz</a>
-                <a href="https://api.hamburg.de/datasets/v1/schulen"
+                <Link class="hover:font-bold" href="#">Impressum</Link>
+                <Link class="hover:font-bold" href="#">Datenschutz</Link>
+                <a class="hover:font-bold" href="https://api.hamburg.de/datasets/v1/schulen"
                    target="_blank">Datenquelle</a>
             </div>
             <div class="text-xs">
-                &copy; {{ new Date().getFullYear() }} Kay Markschies, data provided by
+                &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 0.2 - App still in development - Data
+                provided by
                 <a href="https://api.hamburg.de/datasets/v1/schulen"
                    target="_blank">hamburg.de
                 </a>
