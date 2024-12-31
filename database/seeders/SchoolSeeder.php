@@ -32,6 +32,11 @@ class SchoolSeeder extends Seeder
             'schul_telefonnr' => $school['properties']['schul_telefonnr'] ?? null,
             'fax' => $school['properties']['fax'] ?? null,
             'bezirk' => $school['properties']['bezirk'],
+            'kapitelbezeichnung' => $school['properties']['kapitelbezeichnung'] ?? null,
+            'abschluss' => $school['properties']['abschluss'] ?? null,
+            'rechtsform' => $school['properties']['rechtsform'] ?? null,
+            'schulform' => $school['properties']['schulform'] ?? null,
+            'ganztagsform' => $school['properties']['ganztagsform'] ?? null,
         ]);
     }
 }

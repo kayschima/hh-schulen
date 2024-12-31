@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('schul_telefonnr')->nullable();
             $table->string('fax')->nullable();
             $table->string('bezirk');
+            $table->string('kapitelbezeichnung')->nullable();
+            $table->string('abschluss')->nullable();
+            $table->string('rechtsform')->nullable();
+            $table->string('schulform')->nullable();
+            $table->string('ganztagsform')->nullable();
             $table->timestamps();
         });
     }
