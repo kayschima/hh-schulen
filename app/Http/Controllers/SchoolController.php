@@ -20,6 +20,8 @@ class SchoolController extends Controller
                         ->orWhere('schulform', 'LIKE', '%'.$search.'%')
                         ->orWhere('ganztagsform', 'LIKE', '%'.$search.'%')
                         ->orWhere('kapitelbezeichnung', 'LIKE', '%'.$search.'%')
+                        ->orWhere('abschluss', 'LIKE', '%'.$search.'%')
+                        ->orWhere('bezirk', 'LIKE', '%'.$search.'%')
                     )
                     ->orderBy('schulname')
                     ->orderBy('schul_id')
