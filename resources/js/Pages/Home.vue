@@ -14,8 +14,10 @@ watchDebounced(suche, () => {
     let url = new URL(window.location.href)
     if (suche.value) {
         url.searchParams.append('search', suche.value)
+        url.searchParams.set('page', 1)
     } else {
         url.searchParams.delete('search')
+        url.searchParams.delete('page')
     }
 
     router.visit(url.toString(), {
@@ -78,7 +80,7 @@ watchDebounced(suche, () => {
             </div>
             <div class="text-xs">
                 &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 0.2 - App still in development - Data
-                provided by
+                provided daily by
                 <a href="https://api.hamburg.de/datasets/v1/schulen"
                    target="_blank">hamburg.de
                 </a>
