@@ -16,8 +16,8 @@ const isExpanded = ref(false)
         <td class="py-1 px-4" v-text="school.schul_id"/>
         <td class="py-1 px-4">
             <p v-html="school.schulname"></p>
-            {{ school.kapitelbezeichnung }}<br>
-            {{ school.bezirk }}<br>
+            &#8611; {{ school.kapitelbezeichnung }}<br>
+            &#8611; {{ school.bezirk }}<br>
         </td>
     </tr>
     <tr v-if="isExpanded" class="border-b">
