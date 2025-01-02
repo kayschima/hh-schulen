@@ -3,6 +3,7 @@ import {Head, Link, router} from '@inertiajs/vue3'
 import {ref} from "vue";
 import {watchDebounced} from "@vueuse/core";
 import SchoolEntry from "@/Components/SchoolEntry.vue";
+import MobileSchoolEntry from "@/Components/MobileSchoolEntry.vue";
 
 defineProps({
     schools: Object
@@ -34,7 +35,7 @@ watchDebounced(suche, () => {
     <Head content="Tagesaktuelle Daten von Hamburger Schulen" meta="description"/>
 
     <div class="max-w-7xl mx-auto">
-        <header class="bg-slate-900 my-4 p-4 text-white rounded-t-lg flex items-center space-x-4">
+        <header class="bg-slate-900 mx-1 my-4 p-4 text-white rounded-t-lg flex items-center space-x-4">
             <h1 class="text-xl font-bold hover:font-extrabold">
                 <a href="/">Hamburger&nbsp;Schulen </a>
             </h1>
@@ -45,23 +46,38 @@ watchDebounced(suche, () => {
         <main class="px-4 text-xs">
             <div class="mt-2 flex justify-center">
                 <Link v-for="link in schools.links"
-                      :class="['px-3 py-1 border', { 'text-slate-500': !link.url, 'font-bold bg-slate-500 text-white': link.active }]"
+                      :class="['text-xs px-1 md:px-3 py-1 border', { 'text-slate-500': !link.url, 'font-bold bg-slate-500 text-white': link.active }]"
                       :href="link.url??'#'"
                       v-html="link.label"/>
             </div>
-            <table class="w-full mt-2 bg-white">
+            <!--            Desktop view-->
+            <table class="hidden md:block mt-2 bg-white">
                 <thead>
                 <tr class="text-left">
-                    <th class="py-2 px-4 border-b"></th>
-                    <th class="py-2 px-4 border-b">Schulnr.</th>
-                    <th class="py-2 px-4 border-b">Name</th>
-                    <th class="py-2 px-4 border-b">Adresse + Ort</th>
-                    <th class="py-2 px-4 border-b">Schultyp</th>
-                    <th class="py-2 px-4 border-b">Bezirk</th>
+                    <th class="py-2 px-4 border-b w-1/12"></th>
+                    <th class="py-2 px-4 border-b w-1/12">Schulnr.</th>
+                    <th class="py-2 px-4 border-b w-2/12">Name</th>
+                    <th class="py-2 px-4 border-b w-4/12">Adresse + Ort</th>
+                    <th class="py-2 px-4 border-b w-2/12">Schultyp</th>
+                    <th class="py-2 px-4 border-b w-2/12">Bezirk</th>
                 </tr>
                 </thead>
                 <tbody>
                 <SchoolEntry v-for="school in schools.data" :school="school"/>
+                </tbody>
+            </table>
+
+            <!--                        Mobile view-->
+            <table class="md:hidden w-full mt-2 bg-white">
+                <thead>
+                <tr class="text-left">
+                    <th class="py-2 px-4 border-b"></th>
+                    <th class="py-2 px-4 border-b">Schulnr.</th>
+                    <th class="py-2 px-4 border-b">Schule</th>
+                </tr>
+                </thead>
+                <tbody>
+                <MobileSchoolEntry v-for="school in schools.data" :school="school"/>
                 </tbody>
             </table>
             <div>
@@ -71,7 +87,7 @@ watchDebounced(suche, () => {
             </div>
 
         </main>
-        <footer class="bg-slate-950 p-4 text-slate-100 text-center rounded-b-lg">
+        <footer class="bg-slate-950 mx-1 p-4 text-slate-100 text-center rounded-b-lg">
             <div class="mb-4 flex items-center justify-around text-sm">
                 <Link class="hover:font-bold" href="#">Impressum</Link>
                 <Link class="hover:font-bold" href="#">Datenschutz</Link>
@@ -79,7 +95,7 @@ watchDebounced(suche, () => {
                    target="_blank">Datenquelle</a>
             </div>
             <div class="text-xs">
-                &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 0.2 - App still in development - Data
+                &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 0.3<br>App still in development - Data
                 provided daily by
                 <a href="https://api.hamburg.de/datasets/v1/schulen"
                    target="_blank">hamburg.de

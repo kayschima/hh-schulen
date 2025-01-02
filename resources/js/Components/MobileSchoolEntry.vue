@@ -14,18 +14,16 @@ const isExpanded = ref(false)
             <ExpandIcon :isExpanded="isExpanded" @click="isExpanded=!isExpanded"/>
         </td>
         <td class="py-1 px-4" v-text="school.schul_id"/>
-        <td class="py-1 px-4" v-text="school.schulname"/>
         <td class="py-1 px-4">
-            <span v-text="school.adresse_strasse_hausnr"/>,
-            <span v-text="school.adresse_ort"/>
+            <p v-html="school.schulname"></p>
+            {{ school.kapitelbezeichnung }}<br>
+            {{ school.bezirk }}<br>
         </td>
-        <td class="py-1 px-4" v-text="school.kapitelbezeichnung"/>
-        <td class="py-1 px-4" v-text="school.bezirk"/>
     </tr>
     <tr v-if="isExpanded" class="border-b">
         <td></td>
-        <td class="py-1 px-4 bg-slate-200 rounded-xl" colspan="5">
-            <div class="grid grid-cols-4 gap-4">
+        <td class="py-1 px-4 bg-slate-200 rounded-xl" colspan="2">
+            <div class="grid grid-cols-2 gap-4">
                 <div class="bg-slate-50 p-2 rounded-xl shadow-md shadow-slate-300">
                     <p class="font-bold pr-2 underline">Rechtsform:</p>
                     <p v-text="school.rechtsform"/>
@@ -41,6 +39,13 @@ const isExpanded = ref(false)
                 <div class="bg-slate-50 p-2 rounded-xl shadow-md shadow-slate-300">
                     <p class="font-bold pr-2 underline">Abschlüsse:</p>
                     <p v-html="school.abschluss?.split('|').join(',<br>')"/>
+                </div>
+                <div class="bg-slate-50 p-2 rounded-xl shadow-md shadow-slate-300">
+                    <p class="font-bold pr-2 underline">Adresse:</p>
+                    <p>
+                        {{ school.adresse_strasse_hausnr }}<br>
+                        {{ school.adresse_ort }}
+                    </p>
                 </div>
                 <div class="bg-slate-50 p-2 rounded-xl shadow-md shadow-slate-300">
                     <p class="font-bold pr-2 underline">Telefon:</p>
