@@ -4,6 +4,7 @@ import {ref} from "vue";
 import {watchDebounced} from "@vueuse/core";
 import SchoolEntry from "@/Components/SchoolEntry.vue";
 import MobileSchoolEntry from "@/Components/MobileSchoolEntry.vue";
+import Footer from "@/Components/Footer.vue";
 
 defineProps({
     schools: Object
@@ -31,7 +32,7 @@ watchDebounced(suche, () => {
 </script>
 
 <template>
-    <Head title="Hamburger Schulen"/>
+    <Head title="Hamburger Schulen - Home"/>
     <Head content="Tagesaktuelle Daten von Hamburger Schulen" meta="description"/>
 
     <div class="max-w-7xl mx-auto">
@@ -87,21 +88,7 @@ watchDebounced(suche, () => {
             </div>
 
         </main>
-        <footer class="bg-slate-950 mx-1 p-4 text-slate-100 text-center rounded-b-lg">
-            <div class="mb-4 flex items-center justify-around text-sm">
-                <Link class="hover:font-bold" href="#">Impressum</Link>
-                <Link class="hover:font-bold" href="#">Datenschutz</Link>
-                <a class="hover:font-bold" href="https://api.hamburg.de/datasets/v1/schulen"
-                   target="_blank">Datenquelle</a>
-            </div>
-            <div class="text-xs">
-                &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 0.3<br>App still in development - Data
-                provided daily by
-                <a href="https://api.hamburg.de/datasets/v1/schulen"
-                   target="_blank">hamburg.de
-                </a>
-            </div>
-        </footer>
+        <Footer/>
     </div>
 </template>
 
