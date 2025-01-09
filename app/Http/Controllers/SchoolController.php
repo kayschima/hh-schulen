@@ -10,19 +10,28 @@ class SchoolController extends Controller
 {
     public function __invoke(Request $request)
     {
+        $words = explode(' ', $request->search);
+
+        $query = School::query();
+
+        foreach ($words as $word) {
+            $query->where(function ($query) use ($word) {
+                $query->where('schul_id', 'LIKE', '%'.$word.'%')
+                    ->orWhere('schulname', 'LIKE', '%'.$word.'%')
+                    ->orWhere('adresse_strasse_hausnr', 'LIKE',
+                        '%'.$word.'%')
+                    ->orWhere('rechtsform', 'LIKE', '%'.$word.'%')
+                    ->orWhere('schulform', 'LIKE', '%'.$word.'%')
+                    ->orWhere('ganztagsform', 'LIKE', '%'.$word.'%')
+                    ->orWhere('kapitelbezeichnung', 'LIKE', '%'.$word.'%')
+                    ->orWhere('abschluss', 'LIKE', '%'.$word.'%')
+                    ->orWhere('bezirk', 'LIKE', '%'.$word.'%');
+            });
+        }
+
         return Inertia::render('Home',
             [
-                'schools' => School::query()
-                    ->when($request->search, fn ($query, $search) => $query->where('schul_id', 'LIKE', '%'.$search.'%')
-                        ->orWhere('schulname', 'LIKE', '%'.$search.'%')
-                        ->orWhere('adresse_strasse_hausnr', 'LIKE', '%'.$search.'%')
-                        ->orWhere('rechtsform', 'LIKE', '%'.$search.'%')
-                        ->orWhere('schulform', 'LIKE', '%'.$search.'%')
-                        ->orWhere('ganztagsform', 'LIKE', '%'.$search.'%')
-                        ->orWhere('kapitelbezeichnung', 'LIKE', '%'.$search.'%')
-                        ->orWhere('abschluss', 'LIKE', '%'.$search.'%')
-                        ->orWhere('bezirk', 'LIKE', '%'.$search.'%')
-                    )
+                'schools' => $query
                     ->orderBy('schulname')
                     ->orderBy('schul_id')
                     ->paginate(10)
