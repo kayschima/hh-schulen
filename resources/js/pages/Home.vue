@@ -60,7 +60,13 @@ watchDebounced(
                     </h2>
                 </div>
                 <div class="mt-6">
-                    <Input v-model="suche" name="search" placeholder="Suche nach Schulnamen, Adressen, Schulformen, Abschlüssen..." type="search" />
+                    <Input
+                        v-model="suche"
+                        autofocus
+                        name="search"
+                        placeholder="Suche nach Schulnamen, Adressen, Schulformen, Abschlüssen..."
+                        type="search"
+                    />
                 </div>
             </nav>
         </header>
