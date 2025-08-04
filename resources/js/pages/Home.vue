@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Footer from '@/components/Footer.vue';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -142,33 +143,33 @@ watchDebounced(
             </Table>
             <Pagination :items-per-page="schools.per_page" :total="schools.total" class="pt-4">
                 <PaginationContent>
-                    <Link :disabled="schools.current_page === 1" :href="schools.first_page_url" method="get">
+                    <Link :disabled="schools.current_page === 1" :href="schools.first_page_url" method="get" preserve-state>
                         <PaginationFirst :disabled="schools.current_page === 1" />
                     </Link>
 
-                    <Link :disabled="schools.current_page === 1" :href="schools.prev_page_url ?? ''" method="get">
+                    <Link :disabled="schools.current_page === 1" :href="schools.prev_page_url ?? ''" method="get" preserve-state>
                         <PaginationPrevious :disabled="schools.current_page === 1" />
                     </Link>
 
                     <template v-for="(item, index) in schools.links.slice(1, -1)" :key="index">
-                        <Link :href="item.url ?? '#'" method="get">
-                            <PaginationItem v-if="item.url" :is-active="item.active" :value="index">
+                        <PaginationItem v-if="item.url" :is-active="item.active" :value="index">
+                            <Link :href="item.url ?? '#'" method="get" preserve-state>
                                 {{ item.label }}
-                            </PaginationItem>
-                            <PaginationEllipsis v-else-if="item.label === '...'" />
-                        </Link>
+                            </Link>
+                        </PaginationItem>
+                        <PaginationEllipsis v-else-if="item.label === '...'" />
                     </template>
 
-                    <Link :disabled="schools.current_page === schools.last_page" :href="schools.next_page_url ?? ''" method="get">
+                    <Link :disabled="schools.current_page === schools.last_page" :href="schools.next_page_url ?? ''" method="get" preserve-state>
                         <PaginationNext :disabled="schools.current_page === schools.last_page" />
                     </Link>
 
-                    <Link :disabled="schools.current_page === schools.last_page" :href="schools.last_page_url" method="get">
+                    <Link :disabled="schools.current_page === schools.last_page" :href="schools.last_page_url" method="get" preserve-state>
                         <PaginationLast :disabled="schools.current_page === schools.last_page" />
                     </Link>
                 </PaginationContent>
             </Pagination>
         </main>
-        <footer class="m-2 w-full rounded-2xl border border-2 border-primary p-8"></footer>
+        <Footer />
     </div>
 </template>
