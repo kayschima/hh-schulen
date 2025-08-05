@@ -72,7 +72,7 @@ watchDebounced(
         </header>
         <main class="m-2 w-full rounded-2xl border-2 border-primary p-1 lg:p-4">
             <Table>
-                <TableCaption class="mb-2 text-xs"
+                <TableCaption class="mb-2 text-xs lg:mb-0"
                     >Seite {{ schools.current_page }} von {{ schools.last_page }} - insgesamt {{ schools.total }} Datensätze
                 </TableCaption>
                 <TableHeader>
