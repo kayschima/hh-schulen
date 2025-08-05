@@ -51,7 +51,7 @@ watchDebounced(
         <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />
     </Head>
     <div class="mx-auto min-h-screen bg-background p-6 text-primary lg:max-w-7xl">
-        <header class="m-2 w-full rounded-2xl border border-2 border-primary p-8">
+        <header class="m-2 w-full rounded-2xl border-2 border-primary p-8">
             <nav>
                 <div>
                     <h1 class="text-3xl leading-tight font-bold tracking-tighter md:text-4xl lg:leading-[1.1]">Hamburger Schulen</h1>
@@ -70,7 +70,7 @@ watchDebounced(
                 </div>
             </nav>
         </header>
-        <main class="m-2 w-full rounded-2xl border border-2 border-primary p-1 lg:p-4">
+        <main class="m-2 w-full rounded-2xl border-2 border-primary p-1 lg:p-4">
             <Table>
                 <TableCaption class="text-xs"
                     >Seite {{ schools.current_page }} von {{ schools.last_page }} - insgesamt {{ schools.total }} Datensätze
@@ -158,7 +158,7 @@ watchDebounced(
                     </Link>
 
                     <template v-for="(item, index) in schools.links.slice(1, -1)" :key="index">
-                        <PaginationItem v-if="item.url" :is-active="item.active" :value="index">
+                        <PaginationItem v-if="item.url" :is-active="item.active" :value="index" class="hidden lg:block">
                             <Link :href="item.url ?? '#'" method="get" preserve-state>
                                 {{ item.label }}
                             </Link>
