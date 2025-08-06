@@ -9,8 +9,14 @@ import { Link } from '@inertiajs/vue3';
             <a class="hover:font-bold" href="https://api.hamburg.de/datasets/v1/schulen" target="_blank">Datenquelle</a>
         </div>
         <div class="text-center text-xs">
-            &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 1.0<br />App still in development - Data provided daily by
-            <a href="https://api.hamburg.de/datasets/v1/schulen" target="_blank">hamburg.de </a>
+            &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 2.0 - open sourced under MIT licence <br />
+            <br />
+            visit us at
+            <a class="hover:underline" href="https://github.com/kayschima/hh-schulen" target="_blank">
+                Github (https://github.com/kayschima/hh-schulen) </a
+            >.
+            <br />
+            App still in development - Data provided daily by <a href="https://api.hamburg.de/datasets/v1/schulen" target="_blank">hamburg.de </a>
         </div>
     </footer>
 </template>
