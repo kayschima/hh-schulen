@@ -10,12 +10,16 @@ class SchoolSeeder extends Seeder
 {
     public function run(): void
     {
-        $response = Http::get('https://api.hamburg.de/datasets/v1/schulen/collections/staatliche_schulen/items?f=json&limit=600')->fluent();
+        $response
+            = Http::get('https://api.hamburg.de/datasets/v1/schulen/collections/staatliche_schulen/items?f=json&limit=600')
+                ->fluent();
         foreach ($response['features'] as $school) {
             $this->extracted($school);
         }
 
-        $response = Http::get('https://api.hamburg.de/datasets/v1/schulen/collections/nicht_staatliche_schulen/items?f=json&limit=600')->fluent();
+        $response
+            = Http::get('https://api.hamburg.de/datasets/v1/schulen/collections/nicht_staatliche_schulen/items?f=json&limit=600')
+                ->fluent();
         foreach ($response['features'] as $school) {
             $this->extracted($school);
         }
@@ -31,12 +35,18 @@ class SchoolSeeder extends Seeder
             'adresse_ort' => $school['properties']['adresse_ort'],
             'schul_telefonnr' => $school['properties']['schul_telefonnr'] ?? null,
             'fax' => $school['properties']['fax'] ?? null,
+            'homepage' => $school['properties']['schul_homepage'] ?? null,
+            'stadtteil' => $school['properties']['stadtteil'] ?? null,
             'bezirk' => $school['properties']['bezirk'],
+            'sozialindex' => $school['properties']['sozialindex'] ?? null,
+            'schulinspektion_link' => $school['properties']['schulinspektion_link'] ?? null,
             'kapitelbezeichnung' => $school['properties']['kapitelbezeichnung'] ?? null,
             'abschluss' => $school['properties']['abschluss'] ?? null,
             'rechtsform' => $school['properties']['rechtsform'] ?? null,
             'schulform' => $school['properties']['schulform'] ?? null,
+            'fremdsprache' => $school['properties']['fremdsprache'] ?? null,
             'ganztagsform' => $school['properties']['ganztagsform'] ?? null,
+            'anzahl_schueler' => $school['properties']['anzahl_schueler'] ?? null,
         ]);
     }
 }

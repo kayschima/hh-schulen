@@ -16,12 +16,18 @@ return new class extends Migration
             $table->string('adresse_ort');
             $table->string('schul_telefonnr')->nullable();
             $table->string('fax')->nullable();
-            $table->string('bezirk');
+            $table->string('homepage')->nullable();
+            $table->string('stadtteil')->nullable();
+            $table->string('bezirk')->nullable();
+            $table->string('sozialindex')->nullable();
+            $table->string('schulinspektion_link')->nullable();
             $table->string('kapitelbezeichnung')->nullable();
             $table->string('abschluss')->nullable();
             $table->string('rechtsform')->nullable();
             $table->string('schulform')->nullable();
+            $table->string('fremdsprache')->nullable();
             $table->string('ganztagsform')->nullable();
+            $table->integer('anzahl_schueler')->nullable();
             $table->timestamps();
         });
     }
