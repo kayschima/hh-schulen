@@ -44,7 +44,7 @@ class SchoolSeeder extends Seeder
             'abschluss' => $school['properties']['abschluss'] ?? null,
             'rechtsform' => $school['properties']['rechtsform'] ?? null,
             'schulform' => $school['properties']['schulform'] ?? null,
-            'fremdsprache' => $school['properties']['fremdsprache'] ?? null,
+            'fremdsprache' => $school['properties']['fremdsprache_mit_klasse'] ?? null,
             'ganztagsform' => $school['properties']['ganztagsform'] ?? null,
             'anzahl_schueler' => $school['properties']['anzahl_schueler'] ?? null,
             'coordinate_1' => $school['geometry']['coordinates'][0] ?? null,
