@@ -117,7 +117,7 @@
     --chart-3: oklch(0.393 0.041 270);
     --chart-4: oklch(0.425 0.031 229);
     --chart-5: oklch(0.405 0.035 257);
-    --radius: 0rem;
+    --radius: 0.625rem;
 }
 
 .dark {
