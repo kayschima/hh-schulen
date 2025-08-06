@@ -2,7 +2,15 @@
 import Footer from '@/components/Footer.vue';
 import SchoolDetailRow from '@/components/SchoolDetailRow.vue';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import {
     Pagination,
@@ -12,7 +20,7 @@ import {
     PaginationItem,
     PaginationLast,
     PaginationNext,
-    PaginationPrevious,
+    PaginationPrevious
 } from '@/components/ui/pagination';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Head, Link, router } from '@inertiajs/vue3';
@@ -65,7 +73,7 @@ watchDebounced(
                         v-model="suche"
                         autofocus
                         name="search"
-                        placeholder="Suche nach Schulnamen, Adressen, Stadtteile, Bezirke, Schulformen, Abschlüssen, Fremdsprachen..."
+                        placeholder="Suche nach Schulnamen, Adressen, Stadtteile, Bezirke, Schulformen, Abschlüssen, Fremdsprachen, usw. (durch Leerzeichen getrennt)"
                         type="search"
                     />
                 </div>
@@ -92,7 +100,7 @@ watchDebounced(
                         <TableCell class="px-1 py-1 text-right lg:px-2">
                             <Dialog>
                                 <DialogTrigger as-child>
-                                    <Button class="rounded-full px-2 py-1" variant="outline">...</Button>
+                                    <Button class="rounded-full px-2 py-1" title="Details" variant="outline">...</Button>
                                 </DialogTrigger>
                                 <DialogContent>
                                     <DialogHeader class="mb-6">
