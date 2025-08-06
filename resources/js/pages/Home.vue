@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import Footer from '@/components/Footer.vue';
+import SchoolDetailRow from '@/components/SchoolDetailRow.vue';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -64,7 +65,7 @@ watchDebounced(
                         v-model="suche"
                         autofocus
                         name="search"
-                        placeholder="Suche nach Schulnamen, Adressen, Schulformen, Abschlüssen..."
+                        placeholder="Suche nach Schulnamen, Adressen, Stadtteile, Bezirke, Schulformen, Abschlüssen, Fremdsprachen..."
                         type="search"
                     />
                 </div>
@@ -79,15 +80,16 @@ watchDebounced(
                     <TableRow>
                         <TableHead></TableHead>
                         <TableHead>Name</TableHead>
-                        <TableHead>Schulnummer</TableHead>
                         <TableHead>Adresse + Ort</TableHead>
                         <TableHead>Schultyp</TableHead>
-                        <TableHead>Bezirk</TableHead>
+                        <TableHead>Stadtteil<br />(Bezirk)</TableHead>
+                        <TableHead>Homepage</TableHead>
+                        <TableHead>Sozialindex</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody class="text-xs lg:text-sm">
                     <TableRow v-for="school in schools.data" :key="school.id" class="p-1">
-                        <TableCell class="p-1 text-right">
+                        <TableCell class="px-1 py-1 text-right lg:px-2">
                             <Dialog>
                                 <DialogTrigger as-child>
                                     <Button class="rounded-full px-2 py-1" variant="outline">...</Button>
@@ -98,34 +100,34 @@ watchDebounced(
                                     </DialogHeader>
 
                                     <form>
-                                        <div class="grid grid-cols-2 gap-4 text-xs">
-                                            <div class="font-bold">Schulnummer:</div>
-                                            <div>{{ school.schul_id }}</div>
-                                            <div class="font-bold">Schulname:</div>
-                                            <div>{{ school.schulname }}</div>
-                                            <div class="font-bold">Straße:</div>
-                                            <div>{{ school.adresse_strasse_hausnr }}</div>
-                                            <div class="font-bold">PLZ + Ort:</div>
-                                            <div>{{ school.adresse_ort }}</div>
-                                            <div class="font-bold">Telefon:</div>
-                                            <div>{{ school.schul_telefonnr }}</div>
-                                            <div class="font-bold">Fax:</div>
-                                            <div>{{ school.fax }}</div>
-                                            <div class="font-bold">Bezirk:</div>
-                                            <div>{{ school.bezirk }}</div>
-                                            <div class="font-bold">Rechtsform:</div>
-                                            <div>{{ school.rechtsform }}</div>
-                                            <div class="font-bold">Schultyp:</div>
-                                            <div>{{ school.kapitelbezeichnung }}</div>
-
-                                            <div class="font-bold whitespace-pre-wrap">Schulformen:</div>
-                                            <div v-html="school.schulform?.split('|').join(',<br>')" />
-
-                                            <div class="font-bold">Ganztagsform:</div>
-                                            <div>{{ school.ganztagsform }}</div>
-
-                                            <div class="font-bold whitespace-pre-wrap">Abschlüsse:</div>
-                                            <div v-html="school.abschluss?.split('|').join(',<br>')" />
+                                        <div class="grid grid-cols-2 gap-x-2 gap-y-2 text-xs lg:text-sm">
+                                            <SchoolDetailRow :data="school.schulname" :title="'Schulname:'" />
+                                            <SchoolDetailRow :data="school.schul_id" :title="'Schulnummer:'" />
+                                            <SchoolDetailRow :data="school.adresse_strasse_hausnr" :title="'Straße:'" />
+                                            <SchoolDetailRow :data="school.adresse_ort" :title="'PLZ + Ort:'" />
+                                            <SchoolDetailRow :data="school.schul_telefonnr" :title="'Telefon:'" />
+                                            <SchoolDetailRow :data="school.fax" :title="'Fax:'" />
+                                            <SchoolDetailRow :data="school.stadtteil" :title="'Stadtteil:'" />
+                                            <SchoolDetailRow :data="school.bezirk" :title="'Bezirk:'" />
+                                            <SchoolDetailRow :data="school.rechtsform" :title="'Rechtsform:'" />
+                                            <SchoolDetailRow :data="school.kapitelbezeichnung" :title="'Schultyp:'" />
+                                            <SchoolDetailRow :data="school.schulform?.split('|').join(',<br>')" :title="'Schulformen:'" />
+                                            <SchoolDetailRow :data="school.ganztagsform" :title="'Ganztagsform:'" />
+                                            <SchoolDetailRow :data="school.abschluss?.split('|').join(',<br>')" :title="'Abschlüsse:'" />
+                                            <SchoolDetailRow :data="school.fremdsprache?.split('|').join(',<br>')" :title="'Fremdsprachen:'" />
+                                            <SchoolDetailRow :data="school.sozialindex" :title="'Sozialindex:'" />
+                                            <SchoolDetailRow :data="school.anzahl_schueler" :title="'Anzahl Schüler:'" />
+                                            <SchoolDetailRow :href="school.homepage" :target="'_homepage'" :title="'Homepage:'" />
+                                            <SchoolDetailRow
+                                                :href="school.schulinspektion_link"
+                                                :target="'_schulinspektion'"
+                                                :title="'Bericht Schulinspektion:'"
+                                            />
+                                            <SchoolDetailRow
+                                                :href="'http://maps.google.com/?q=' + school.coordinate_2 + '+' + school.coordinate_1"
+                                                :target="'_google_maps'"
+                                                :title="'Google Maps:'"
+                                            />
                                         </div>
                                     </form>
                                     <DialogFooter>
@@ -136,14 +138,19 @@ watchDebounced(
                                 </DialogContent>
                             </Dialog>
                         </TableCell>
-                        <TableCell class="p-1 whitespace-pre-wrap">{{ school.schulname }}</TableCell>
-                        <TableCell class="p-1">{{ school.schul_id }}</TableCell>
-                        <TableCell class="p-1 whitespace-pre-wrap"
+                        <TableCell class="px-1 py-1 whitespace-pre-wrap lg:px-2">{{ school.schulname }}</TableCell>
+                        <TableCell class="px-1 py-1 whitespace-pre-wrap lg:px-2"
                             >{{ school.adresse_strasse_hausnr }},
                             {{ school.adresse_ort }}
                         </TableCell>
-                        <TableCell class="p-1">{{ school.kapitelbezeichnung }}</TableCell>
-                        <TableCell class="p-1">{{ school.bezirk }}</TableCell>
+                        <TableCell class="px-1 py-1 lg:px-2">{{ school.kapitelbezeichnung }}</TableCell>
+                        <TableCell class="px-1 py-1 lg:px-2">{{ school.stadtteil }}<br />({{ school.bezirk }})</TableCell>
+                        <TableCell class="px-1 py-1 lg:px-2">
+                            <Button :disabled="!school.homepage" class="px-2 py-1 text-xs" variant="outline">
+                                <a :href="school.homepage" target="_homepage"> Link </a>
+                            </Button>
+                        </TableCell>
+                        <TableCell class="px-1 py-1 lg:px-2">{{ school.sozialindex }}</TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

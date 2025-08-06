@@ -25,7 +25,9 @@ class SchoolController extends Controller
                     ->orWhere('ganztagsform', 'LIKE', '%'.$word.'%')
                     ->orWhere('kapitelbezeichnung', 'LIKE', '%'.$word.'%')
                     ->orWhere('abschluss', 'LIKE', '%'.$word.'%')
-                    ->orWhere('bezirk', 'LIKE', '%'.$word.'%');
+                    ->orWhere('stadtteil', 'LIKE', '%'.$word.'%')
+                    ->orWhere('bezirk', 'LIKE', '%'.$word.'%')
+                    ->orWhere('fremdsprache', 'LIKE', '%'.$word.'%');
             });
         }
 

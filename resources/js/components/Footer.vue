@@ -9,7 +9,7 @@ import { Link } from '@inertiajs/vue3';
             <a class="hover:font-bold" href="https://api.hamburg.de/datasets/v1/schulen" target="_blank">Datenquelle</a>
         </div>
         <div class="text-center text-xs">
-            &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 0.8<br />App still in development - Data provided daily by
+            &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 1.0<br />App still in development - Data provided daily by
             <a href="https://api.hamburg.de/datasets/v1/schulen" target="_blank">hamburg.de </a>
         </div>
     </footer>
