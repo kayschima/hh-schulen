@@ -47,6 +47,8 @@ class SchoolSeeder extends Seeder
             'fremdsprache' => $school['properties']['fremdsprache'] ?? null,
             'ganztagsform' => $school['properties']['ganztagsform'] ?? null,
             'anzahl_schueler' => $school['properties']['anzahl_schueler'] ?? null,
+            'coordinate_1' => $school['geometry']['coordinates'][0] ?? null,
+            'coordinate_2' => $school['geometry']['coordinates'][1] ?? null,
         ]);
     }
 }

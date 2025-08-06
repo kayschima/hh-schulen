@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('fremdsprache')->nullable();
             $table->string('ganztagsform')->nullable();
             $table->integer('anzahl_schueler')->nullable();
+            $table->float('coordinate_1')->nullable();
+            $table->float('coordinate_2')->nullable();
             $table->timestamps();
         });
     }
