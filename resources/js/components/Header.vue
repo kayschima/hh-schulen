@@ -11,7 +11,7 @@ import { Link } from '@inertiajs/vue3';
                     Finde Informationen zu Schulen in Hamburg
                 </h2>
             </div>
-            <div class="mt-4 flex items-center space-x-4 text-sm lg:space-x-8">
+            <div class="mt-4 flex items-center space-x-4 text-sm lg:space-x-8 lg:text-base">
                 <Link class="hover:font-bold" href="/">Home</Link>
                 <Link class="hover:font-bold" href="/impressum">Impressum</Link>
                 <Link class="hover:font-bold" href="/datenschutz">Datenschutz</Link>
