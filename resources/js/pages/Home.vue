@@ -1,29 +1,11 @@
 <script lang="ts" setup>
 import Footer from '@/components/Footer.vue';
-import SchoolDetailRow from '@/components/SchoolDetailRow.vue';
+import SchoolDetailDialog from '@/components/SchoolDetailDialog.vue';
+import SchoolPagination from '@/components/SchoolPagination.vue';
 import { Button } from '@/components/ui/button';
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger
-} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationFirst,
-    PaginationItem,
-    PaginationLast,
-    PaginationNext,
-    PaginationPrevious
-} from '@/components/ui/pagination';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Head, Link, router } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 import { watchDebounced } from '@vueuse/core';
 import { ref } from 'vue';
 
@@ -98,53 +80,7 @@ watchDebounced(
                 <TableBody class="text-xs lg:text-sm">
                     <TableRow v-for="school in schools.data" :key="school.id" class="p-1">
                         <TableCell class="px-1 py-1 text-right lg:px-2">
-                            <Dialog>
-                                <DialogTrigger as-child>
-                                    <Button class="rounded-full px-2 py-1" title="Details" variant="outline">...</Button>
-                                </DialogTrigger>
-                                <DialogContent>
-                                    <DialogHeader class="mb-6">
-                                        <DialogTitle>{{ school.schulname }}</DialogTitle>
-                                    </DialogHeader>
-
-                                    <form>
-                                        <div class="grid grid-cols-2 gap-x-2 gap-y-2 text-xs lg:text-sm">
-                                            <SchoolDetailRow :data="school.schulname" :title="'Schulname:'" />
-                                            <SchoolDetailRow :data="school.schul_id" :title="'Schulnummer:'" />
-                                            <SchoolDetailRow :data="school.adresse_strasse_hausnr" :title="'Straße:'" />
-                                            <SchoolDetailRow :data="school.adresse_ort" :title="'PLZ + Ort:'" />
-                                            <SchoolDetailRow :data="school.schul_telefonnr" :title="'Telefon:'" />
-                                            <SchoolDetailRow :data="school.fax" :title="'Fax:'" />
-                                            <SchoolDetailRow :data="school.stadtteil" :title="'Stadtteil:'" />
-                                            <SchoolDetailRow :data="school.bezirk" :title="'Bezirk:'" />
-                                            <SchoolDetailRow :data="school.rechtsform" :title="'Rechtsform:'" />
-                                            <SchoolDetailRow :data="school.kapitelbezeichnung" :title="'Schultyp:'" />
-                                            <SchoolDetailRow :data="school.schulform?.split('|').join(',<br>')" :title="'Schulformen:'" />
-                                            <SchoolDetailRow :data="school.ganztagsform" :title="'Ganztagsform:'" />
-                                            <SchoolDetailRow :data="school.abschluss?.split('|').join(',<br>')" :title="'Abschlüsse:'" />
-                                            <SchoolDetailRow :data="school.fremdsprache?.split('|').join(',<br>')" :title="'Fremdsprachen:'" />
-                                            <SchoolDetailRow :data="school.sozialindex" :title="'Sozialindex:'" />
-                                            <SchoolDetailRow :data="school.anzahl_schueler" :title="'Anzahl Schüler:'" />
-                                            <SchoolDetailRow :href="school.homepage" :target="'_homepage'" :title="'Homepage:'" />
-                                            <SchoolDetailRow
-                                                :href="school.schulinspektion_link"
-                                                :target="'_schulinspektion'"
-                                                :title="'Bericht Schulinspektion:'"
-                                            />
-                                            <SchoolDetailRow
-                                                :href="'http://maps.google.com/?q=' + school.coordinate_2 + '+' + school.coordinate_1"
-                                                :target="'_google_maps'"
-                                                :title="'Google Maps:'"
-                                            />
-                                        </div>
-                                    </form>
-                                    <DialogFooter>
-                                        <DialogClose as-child>
-                                            <Button> Schließen</Button>
-                                        </DialogClose>
-                                    </DialogFooter>
-                                </DialogContent>
-                            </Dialog>
+                            <SchoolDetailDialog :schoolDetails="school" />
                         </TableCell>
                         <TableCell class="px-1 py-1 whitespace-pre-wrap lg:px-2">{{ school.schulname }}</TableCell>
                         <TableCell class="px-1 py-1 whitespace-pre-wrap lg:px-2"
@@ -162,34 +98,8 @@ watchDebounced(
                     </TableRow>
                 </TableBody>
             </Table>
-            <Pagination :items-per-page="schools.per_page" :total="schools.total" class="pt-4">
-                <PaginationContent>
-                    <Link :disabled="schools.current_page === 1" :href="schools.first_page_url" method="get" preserve-state>
-                        <PaginationFirst :disabled="schools.current_page === 1" />
-                    </Link>
 
-                    <Link :disabled="schools.current_page === 1" :href="schools.prev_page_url ?? ''" method="get" preserve-state>
-                        <PaginationPrevious :disabled="schools.current_page === 1" />
-                    </Link>
-
-                    <template v-for="(item, index) in schools.links.slice(1, -1)" :key="index">
-                        <PaginationItem v-if="item.url" :is-active="item.active" :value="index" class="hidden lg:block">
-                            <Link :href="item.url ?? '#'" method="get" preserve-state>
-                                {{ item.label }}
-                            </Link>
-                        </PaginationItem>
-                        <PaginationEllipsis v-else-if="item.label === '...'" />
-                    </template>
-
-                    <Link :disabled="schools.current_page === schools.last_page" :href="schools.next_page_url ?? ''" method="get" preserve-state>
-                        <PaginationNext :disabled="schools.current_page === schools.last_page" />
-                    </Link>
-
-                    <Link :disabled="schools.current_page === schools.last_page" :href="schools.last_page_url" method="get" preserve-state>
-                        <PaginationLast :disabled="schools.current_page === schools.last_page" />
-                    </Link>
-                </PaginationContent>
-            </Pagination>
+            <SchoolPagination :school-pagination-items="schools" />
         </main>
         <Footer />
     </div>
