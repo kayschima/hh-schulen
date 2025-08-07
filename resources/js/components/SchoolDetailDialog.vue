@@ -2,6 +2,7 @@
 import SchoolDetailRow from '@/components/SchoolDetailRow.vue';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 defineProps({
     schoolDetails: Object,
@@ -10,7 +11,7 @@ defineProps({
 
 <template>
     <div>
-        <Dialog>
+        <Dialog class="min-w-1/2">
             <DialogTrigger as-child>
                 <Button class="rounded-full px-2 py-1" title="Details" variant="outline">...</Button>
             </DialogTrigger>
@@ -19,7 +20,7 @@ defineProps({
                     <DialogTitle>{{ schoolDetails.schulname }}</DialogTitle>
                 </DialogHeader>
 
-                <form>
+                <ScrollArea class="h-[400px] w-full p-2 lg:h-[600px]">
                     <div class="grid grid-cols-2 gap-x-2 gap-y-2 text-xs lg:text-sm">
                         <SchoolDetailRow :data="schoolDetails.schulname" :title="'Schulname:'" />
                         <SchoolDetailRow :data="schoolDetails.schul_id" :title="'Schulnummer:'" />
@@ -49,7 +50,8 @@ defineProps({
                             :title="'Google Maps:'"
                         />
                     </div>
-                </form>
+                </ScrollArea>
+
                 <DialogFooter>
                     <DialogClose as-child>
                         <Button> Schließen</Button>
