@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Footer from '@/components/Footer.vue';
-import { Button } from '@/components/ui/button';
-import { Head, Link, router } from '@inertiajs/vue3';
+import Header from '@/components/Header.vue';
+import { Head, router } from '@inertiajs/vue3';
 import { watchDebounced } from '@vueuse/core';
 import { ref } from 'vue';
 
@@ -38,22 +38,8 @@ watchDebounced(
         <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />
     </Head>
     <div class="mx-auto min-h-screen bg-background p-6 text-primary lg:max-w-7xl">
-        <header class="m-2 w-full rounded-2xl border border-2 border-primary p-8">
-            <nav>
-                <div>
-                    <h1 class="text-3xl leading-tight font-bold tracking-tighter md:text-4xl lg:leading-[1.1]">Hamburger Schulen</h1>
-                    <h2 class="text-lg leading-tight font-bold tracking-tighter md:text-xl lg:leading-[1.1]">
-                        Finde Informationen zu Schulen in Hamburg
-                    </h2>
-                </div>
-                <div class="mt-6">
-                    <Link href="/">
-                        <Button variant="outline">zur Startseite</Button>
-                    </Link>
-                </div>
-            </nav>
-        </header>
-        <main class="m-2 w-full rounded-2xl border border-2 border-primary p-1 lg:p-4">
+        <Header />
+        <main class="m-2 w-full rounded-2xl border border-2 border-primary p-2 lg:p-4">
             <h2 class="text-lg font-bold">Impressum</h2>
             <p class="mt-4">
                 Angaben gemäß § 5 TMG<br />

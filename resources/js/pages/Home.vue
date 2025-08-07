@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import Footer from '@/components/Footer.vue';
+import Header from '@/components/Header.vue';
 import SchoolDetailDialog from '@/components/SchoolDetailDialog.vue';
 import SchoolPagination from '@/components/SchoolPagination.vue';
 import { Button } from '@/components/ui/button';
@@ -42,26 +43,17 @@ watchDebounced(
         <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />
     </Head>
     <div class="mx-auto min-h-screen bg-background p-6 text-primary lg:max-w-7xl">
-        <header class="m-2 w-full rounded-2xl border-2 border-primary p-8">
-            <nav>
-                <div>
-                    <h1 class="text-3xl leading-tight font-bold tracking-tighter md:text-4xl lg:leading-[1.1]">Hamburger Schulen</h1>
-                    <h2 class="text-lg leading-tight font-bold tracking-tighter md:text-xl lg:leading-[1.1]">
-                        Finde Informationen zu Schulen in Hamburg
-                    </h2>
-                </div>
-                <div class="mt-6">
-                    <Input
-                        v-model="suche"
-                        autofocus
-                        name="search"
-                        placeholder="Suche nach Schulnamen, Adressen, Stadtteile, Bezirke, Schulformen, Abschlüssen, Fremdsprachen, usw. (durch Leerzeichen getrennt)"
-                        type="search"
-                    />
-                </div>
-            </nav>
-        </header>
-        <main class="m-2 w-full rounded-2xl border-2 border-primary p-1 lg:p-4">
+        <Header />
+        <main class="m-2 w-full rounded-2xl border-2 border-primary p-2 lg:p-4">
+            <div class="mb-4">
+                <Input
+                    v-model="suche"
+                    autofocus
+                    name="search"
+                    placeholder="Suche nach Schulnamen, Adressen, Stadtteile, Bezirke, Schulformen, Abschlüssen, Fremdsprachen, usw. (durch Leerzeichen getrennt)"
+                    type="search"
+                />
+            </div>
             <Table>
                 <TableCaption class="mb-2 text-xs lg:mb-0"
                     >Seite {{ schools.current_page }} von {{ schools.last_page }} - insgesamt {{ schools.total }} Datensätze
