@@ -5,13 +5,13 @@ Schulbehörde Hamburg bereitgestellt und regelmäßig aktualisiert.
 
 ## DEMO
 
-Eine Demo-Version der Anwendung ist unter [https://hh-schulen.kayschima.de](https://hh-schulen.kayschima.de)
+Eine Demo-Version der Anwendung ist unter [https://hamburger-schulen.de](https://hamburger-schulen.de)
 verfügbar.  
 Dort können Sie die Anwendung in Aktion sehen und sich von den Funktionen überzeugen.
 
 ## Contributing
 
-Falls du bei der Weiteentwicklung mithelfen möchtest und dich gut mit dem Laravel-Framwork auskennst, kannst du gerne
+Falls du bei der Weiterentwicklung mithelfen möchtest und dich gut mit dem Laravel-Framwork auskennst, kannst du gerne
 einen Pull Request erstellen. Wir freuen uns über jede Unterstützung!
 
 ## Sicherheitsmeldungen
