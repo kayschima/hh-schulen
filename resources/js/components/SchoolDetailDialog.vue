@@ -16,17 +16,18 @@ defineProps({
                 <Button class="rounded-full px-2 py-1" title="Details" variant="outline">...</Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogHeader class="mb-6">
-                    <DialogTitle>{{ schoolDetails.schulname }}</DialogTitle>
-                </DialogHeader>
+                <DialogHeader>
+                    <DialogTitle class="mx-4 rounded-lg border px-4 py-2">
+                        <h1 class="text-xl font-bold" v-text="schoolDetails.schulname" />
 
+                        <div v-text="schoolDetails.adresse_strasse_hausnr" />
+                        <div v-text="schoolDetails.adresse_ort" />
+                        <div>Tel.: {{ schoolDetails.schul_telefonnr }}</div>
+                    </DialogTitle>
+                </DialogHeader>
                 <ScrollArea class="h-[400px] w-full p-2 lg:h-[600px]">
                     <div class="grid grid-cols-2 gap-x-2 gap-y-2 text-xs lg:text-sm">
-                        <SchoolDetailRow :data="schoolDetails.schulname" :title="'Schulname:'" />
                         <SchoolDetailRow :data="schoolDetails.schul_id" :title="'Schulnummer:'" />
-                        <SchoolDetailRow :data="schoolDetails.adresse_strasse_hausnr" :title="'Straße:'" />
-                        <SchoolDetailRow :data="schoolDetails.adresse_ort" :title="'PLZ + Ort:'" />
-                        <SchoolDetailRow :data="schoolDetails.schul_telefonnr" :title="'Telefon:'" />
                         <SchoolDetailRow :data="schoolDetails.fax" :title="'Fax:'" />
                         <SchoolDetailRow :data="schoolDetails.stadtteil" :title="'Stadtteil:'" />
                         <SchoolDetailRow :data="schoolDetails.bezirk" :title="'Bezirk:'" />
