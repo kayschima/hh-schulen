@@ -2,7 +2,7 @@
 <template>
     <footer class="m-2 w-full rounded-2xl border border-2 border-primary p-1 lg:p-4">
         <div class="text-center text-xs">
-            &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 2.11 - open sourced under MIT licence <br />
+            &copy; {{ new Date().getFullYear() }} Kay Markschies - Version 2.12 - open sourced under MIT licence <br />
             <br />
             visit us at
             <a class="hover:underline" href="https://github.com/kayschima/hh-schulen" target="_blank">
