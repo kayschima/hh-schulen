@@ -15,7 +15,7 @@ class SchoolController extends Controller
         $query = School::query();
 
         foreach ($words as $word) {
-            $query->where(function ($query) use ($word) {
+            $query->where(function ($query) use ($word): void {
                 $query->where('schul_id', 'LIKE', '%'.$word.'%')
                     ->orWhere('schulname', 'LIKE', '%'.$word.'%')
                     ->orWhere('adresse_strasse_hausnr', 'LIKE',
